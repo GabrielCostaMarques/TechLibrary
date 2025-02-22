@@ -1,5 +1,6 @@
 using TechLibrary.Api.Filters;
 
+
 var builder = WebApplication.CreateBuilder(args);
 
 
@@ -10,6 +11,8 @@ builder.Services.AddSwaggerGen();
 
 //implementando qlq tipo de exception
 builder.Services.AddMvc(options=>options.Filters.Add(typeof(ExceptionFilter)));
+
+builder.Services.AddAuthentication(JwtBearerDefaults);
 
 var app = builder.Build();
 

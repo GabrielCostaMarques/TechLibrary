@@ -1,25 +1,25 @@
 using TechLibrary.Api.Filters;
-
-
+using Scalar.AspNetCore;
 var builder = WebApplication.CreateBuilder(args);
 
 
 builder.Services.AddControllers();
 
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+//builder.Services.AddSwaggerGen();
 
 //implementando qlq tipo de exception
 builder.Services.AddMvc(options=>options.Filters.Add(typeof(ExceptionFilter)));
-
-builder.Services.AddAuthentication(JwtBearerDefaults);
-
+builder.Services.AddOpenApi();
 var app = builder.Build();
 
 if (app.Environment.IsDevelopment())
 {
-    app.UseSwagger();
-    app.UseSwaggerUI();
+    //app.UseSwagger();
+    //app.UseSwaggerUI();
+
+    app.MapOpenApi();
+    app.MapScalarApiReference();
 }
 
 app.UseHttpsRedirection();
